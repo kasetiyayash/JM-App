@@ -7,27 +7,29 @@ const Menu = () => {
   console.log(router, "Router");
   return (
     <nav className="fixed bottom-0 flex w-full p-2 md:right-auto md:left-2 md:bottom-3 md:top-20 md:w-auto">
-      <div className="flex w-full items-center justify-center space-x-16 rounded-3xl border-2 border-white px-10 py-5 md:pl-2 md:flex-col md:justify-start md:space-x-0 md:space-y-12 md:rounded-tl-none md:rounded-bl-none md:border-l-0 md:px-5 md:py-10">
+      <div className="flex w-full items-center justify-around rounded-3xl border-2 border-white px-10 py-4 md:flex-col md:justify-start md:space-x-0 md:space-y-12 md:rounded-tl-none md:rounded-bl-none md:border-l-0 md:px-5 md:py-10 md:pl-2">
         <Home
-          className={router.pathname === '/' && 'text-blue'}
+          className={`${router.pathname === '/' && 'text-blue'} h-6 w-6`}
           onClick={() => {
             router.push('/')
           }}
         />
         <Trailer
-          className={router.pathname === '/trailers' && 'text-blue'}
+          className={`${
+            router.pathname === '/trailers' && 'text-blue'
+          } h-6 w-6`}
           onClick={() => {
             router.push('/trailers')
           }}
         />
         <Series
-          className={router.pathname === '/series' && 'text-blue'}
+          className={`${router.pathname === '/series' && 'text-blue'} h-6 w-6`}
           onClick={() => {
             router.push('/series')
           }}
         />
         <Search
-          className={router.pathname === '/search' && 'text-blue'}
+          className={`${router.pathname === '/search' && 'text-blue'} h-6 w-6`}
           onClick={() => {
             router.push('/search')
           }}

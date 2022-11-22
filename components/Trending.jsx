@@ -41,7 +41,7 @@ const Trending = ({ data }) => {
               src={getImage(item?.backdrop_path)}
               alt="poster"
             />
-            <div className="absolute bottom-1 left-1 right-1 rounded-b-xl bg-white bg-opacity-20 px-2 py-2 md:py-1 text-black backdrop-blur-xl md:bottom-2 md:left-2 md:right-2 md:space-y-6 md:rounded-2xl md:p-4">
+            <div className="absolute bottom-1 left-1 right-1 rounded-b-xl bg-white bg-opacity-20 px-2 py-2 text-black backdrop-blur-xl md:bottom-2 md:left-2 md:right-2 md:space-y-6 md:rounded-2xl md:p-4 md:py-1">
               <p className="line-clamp-1 md:text-2xl">
                 {item?.name ??
                   item?.title ??

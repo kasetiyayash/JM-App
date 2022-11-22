@@ -39,7 +39,7 @@ const Trailer = (props) => {
         <path d="M15 2.1l-.9 6M8 4.7l-1.2 6.6"></path>
       </g>
     </svg>
-  );
+  )
 };
 
 const Series = (props) => {
@@ -61,7 +61,7 @@ const Series = (props) => {
         <path d="M21.4 23H2.6c-.9 0-1.6-.7-1.6-1.6V8.9c0-.9.7-1.6 1.6-1.6h18.9c.8 0 1.5.7 1.5 1.6v12.6c0 .8-.7 1.5-1.6 1.5zM6.4 1L12 7M17.6 1L12 7"></path>
       </g>
     </svg>
-  );
+  )
 };
 
 const Search = (props) => {

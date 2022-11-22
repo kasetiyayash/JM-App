@@ -1,7 +1,12 @@
+import Loader from '@/components/Loader';
 import React from 'react'
 
 const Trailers = () => {
-  return <div>Trailers</div>;
+  return (
+    <div>
+      <Loader />
+    </div>
+  )
 };
 
 export default Trailers
