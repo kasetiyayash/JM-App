@@ -1,6 +1,6 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Lazy, FreeMode, EffectCoverflow, Autoplay } from 'swiper'
+import { EffectCoverflow, Autoplay } from 'swiper'
 import { getImage } from '@/utils/getImage'
 
 const Trending = ({ data }) => {
@@ -8,9 +8,8 @@ const Trending = ({ data }) => {
     <Swiper
       lazy={true}
       loop={true}
-      freeMode={true}
       effect={'coverflow'}
-      slidesPerView={1.5}
+      slidesPerView={2.2}
       spaceBetween={50}
       centeredSlides={true}
       autoplay={{
@@ -29,19 +28,25 @@ const Trending = ({ data }) => {
           slidesPerView: 1.1,
           spaceBetween: 5,
         },
+        640: {
+          slidesPerView: 2.2,
+          spaceBetween: 50,
+        },
       }}
-      modules={[Lazy, FreeMode, EffectCoverflow, Autoplay]}
+      modules={[EffectCoverflow, Autoplay]}
     >
       {data?.results?.map((item, key) => {
-        console.log(item, 'Item')
         return (
-          <SwiperSlide className="relative w-1/2 rounded-2xl border-2 p-1">
+          <SwiperSlide
+            key={key}
+            className="relative w-1/2 rounded-2xl border-2 p-1"
+          >
             <img
               className="swiper-lazy rounded-xl"
               src={getImage(item?.backdrop_path)}
               alt="poster"
             />
-            <div className="absolute bottom-1 left-1 right-1 rounded-b-xl bg-white bg-opacity-20 px-2 py-2 text-black backdrop-blur-xl md:bottom-2 md:left-2 md:right-2 md:space-y-6 md:rounded-2xl md:p-4 md:py-1">
+            <div className="absolute bottom-1 left-1 right-1 rounded-b-xl bg-white bg-opacity-20 p-2 text-black backdrop-blur-xl md:bottom-2 md:left-2 md:right-2 md:space-y-4 md:rounded-2xl md:p-4 md:py-4">
               <p className="line-clamp-1 md:text-2xl">
                 {item?.name ??
                   item?.title ??
