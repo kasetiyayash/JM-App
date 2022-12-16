@@ -1,26 +1,31 @@
 import "../styles/globals.css";
 import Menu from "@/components/Menu";
-import Header from "@/components/Header";
-import { Provider } from "react-redux";
+import { Provider } from 'react-redux'
 import { store } from "@/store/store";
+import { AnimatePresence } from 'framer-motion'
 
 import "swiper/css";
 import "swiper/css/lazy";
 import "swiper/css/effect-coverflow";
+import Head from "next/head";
+import Cursor from "@/components/Cursor";
 
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps,router }) {
   return (
     <>
       <Provider store={store}>
-        <Header />
-        <Menu />
-        <div className="md:ml-24 md:mt-6 font-sec">
+        <Cursor />
+        {/* {router.pathname === '/' ? (
           <Component {...pageProps} />
-        </div>
+        ) : ( */}
+        <Menu>
+          <Component {...pageProps} />
+        </Menu>
+        {/* )} */}
       </Provider>
     </>
-  );
+  )
 }
 
 export default MyApp;

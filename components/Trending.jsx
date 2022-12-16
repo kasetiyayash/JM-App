@@ -1,67 +1,62 @@
-import React from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { EffectCoverflow, Autoplay } from 'swiper'
-import { getImage } from '@/utils/getImage'
+import { getImage, getOriginalImage } from '@/utils/getImage'
+import { motion as m } from 'framer-motion'
+import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { Loader } from './Loader'
 
 const Trending = ({ data }) => {
+  const carousel = useRef(null)
+  const router = useRouter()
+  const [width, setWidth] = useState(0)
+
+  useEffect(() => {
+    setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth)
+  }, [data])
+
+  const MovieImage = ({ item }) => {
+    const [isLoading, setIsLoading] = useState(true)
+    return (
+      <m.div
+        onClick={() => {
+          router.push(`visit/${item.media_type}/${item.id}`)
+        }}
+        className="relative w-full min-w-[10rem] py-2 md:min-w-[13rem] md:py-6 lg:min-w-[15rem] xl:min-w-[16rem]"
+      >
+        {isLoading && (
+          <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+            <Loader />
+          </div>
+        )}
+        <Image
+          width={160}
+          height={256}
+          alt="poster"
+          loading="lazy"
+          placeholder="blur"
+          blurDataURL={`/placeholder.webp`}
+          src={getOriginalImage(item?.poster_path)}
+          onLoadingComplete={() => {
+            setIsLoading(false)
+          }}
+          className="pointer-events-none h-full w-full rounded-xl drop-shadow-[0px_0px_3px_rgb(252,243,234)]"
+        />
+      </m.div>
+    )
+  }
+
   return (
-    <Swiper
-      lazy={true}
-      loop={true}
-      effect={'coverflow'}
-      slidesPerView={2.2}
-      spaceBetween={50}
-      centeredSlides={true}
-      autoplay={{
-        delay: 4000,
-        disableOnInteraction: false,
-      }}
-      coverflowEffect={{
-        rotate: 50,
-        stretch: 0,
-        depth: 100,
-        modifier: 1,
-        slideShadows: true,
-      }}
-      breakpoints={{
-        320: {
-          slidesPerView: 1.1,
-          spaceBetween: 5,
-        },
-        640: {
-          slidesPerView: 2.2,
-          spaceBetween: 50,
-        },
-      }}
-      modules={[EffectCoverflow, Autoplay]}
-    >
-      {data?.results?.map((item, key) => {
-        return (
-          <SwiperSlide
-            key={key}
-            className="relative w-1/2 rounded-2xl border-2 p-1"
-          >
-            <img
-              className="swiper-lazy rounded-xl"
-              src={getImage(item?.backdrop_path)}
-              alt="poster"
-            />
-            <div className="absolute bottom-1 left-1 right-1 rounded-b-xl bg-white bg-opacity-20 p-2 text-black backdrop-blur-xl md:bottom-2 md:left-2 md:right-2 md:space-y-4 md:rounded-2xl md:p-4 md:py-4">
-              <p className="line-clamp-1 md:text-2xl">
-                {item?.name ??
-                  item?.title ??
-                  item?.original_title ??
-                  item?.original_name}
-              </p>
-              <p className="invisible h-0 w-0 font-sans line-clamp-3 md:visible md:h-auto md:w-auto">
-                {item?.overview}
-              </p>
-            </div>
-          </SwiperSlide>
-        )
-      })}
-    </Swiper>
+    <m.div className="w-full h-full overflow-hidden" ref={carousel}>
+      <m.div
+        drag="x"
+        dragConstraints={{ right: 0, left: -width }}
+        className="flex px-2 space-x-4"
+      >
+        {(data ?? [])?.map((item, key) => {
+          return <MovieImage key={key} item={item} />
+        })}
+      </m.div>
+    </m.div>
   )
 }
-
 export default Trending

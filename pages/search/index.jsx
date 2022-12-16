@@ -1,12 +1,7 @@
-import Loader from '@/components/Loader';
 import React from 'react'
 
 const Search = () => {
-  return (
-    <div>
-      <Loader />
-    </div>
-  )
+  return <div></div>
 };
 
-export default Search;
+export default Search

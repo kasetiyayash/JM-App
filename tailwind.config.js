@@ -1,27 +1,30 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-    "./layout/**/*.{js,ts,jsx,tsx}",
-    "./assets/**/*.{js,ts,jsx,tsx}",
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+    './layout/**/*.{js,ts,jsx,tsx}',
+    './assets/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
       fontFamily: {
-        pri: ["mainstay"],
-        sec: ["olive"],
+        // pri: ['Clash Display'],
+        // sec: ['DM Sans'],
       },
       colors: {
-        blue: "#3b82f6",
+        darkBlue: '#152238',
+        lightBlue: '#687C96',
+        common: '#bed9fd',
+        sec: '#fcf3ea',
       },
     },
   },
   plugins: [
     function ({ addVariant }) {
-      addVariant("child", "& > *");
-      addVariant("child-hover", "& > *:hover");
+      addVariant('child', '& > *')
+      addVariant('child-hover', '& > *:hover')
     },
-    require("@tailwindcss/line-clamp"),
+    require('@tailwindcss/line-clamp'),
   ],
-};
+}
